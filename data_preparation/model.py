@@ -3,7 +3,6 @@ from datasets import load_dataset
 from transformers import AutoModelForCTC,AutoProcessor
 import torchaudio.functional as F
 
-
 class Model:
     _instance=None 
     DEVICE=torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -14,7 +13,7 @@ class Model:
         if cls._instance is None:
             cls._instance=super().__new__(cls)
             cls._instance.model=AutoModelForCTC.from_pretrained(cls.MODEL_ID).to(cls.DEVICE)
-            cls._instance.processor = AutoProcessor.from_pretrained(cls.MODEL_ID)
+            #cls._instance.processor = AutoProcessor.from_pretrained(cls.MODEL_ID)
 
         return cls._instance
     

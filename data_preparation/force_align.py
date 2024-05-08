@@ -1,13 +1,35 @@
 from model import Model 
 import torch 
 import torchaudio 
-from utils import Point,Segment
+import numpy as np 
+from .audio import load_audio,SAMPLE_RATE
 
-def load_audio_file(audio_path:str,sample_rate:int):
+from .utils import Point,Segment
 
-    waveform,rate=torchaudio.load(audio_path,sr=sample_rate)
+def align(
+        transcript,
+        model,
+        align_model_metadata,
+        audio,
+        device,
 
-    return waveform,rate
+):
+    if not torch.is_tensor(audio):
+        if isinstance(audio,str):
+            audio=load_audio(audio)
+        audio=torch.from_numpy(audio)
+    
+    if len(audio.shape)==1:
+        audio=audio.unsqueeze(0)
+    
+    MAX_DURATION=audio.shape[1]/SAMPLE_RATE
+
+    total_segments=len(transcript)
+
+    
+
+    
+
 
 def compose_graph(emission,tokens,blank_id=0):
 
@@ -27,18 +49,6 @@ def compose_graph(emission,tokens,blank_id=0):
     return graph 
 
 def backtrack(graph,emission,tokens,blank_id=0): 
-    """
-    Backtracks the probability graph and returns 
-    the most probable path using CTC and viterbi 
-    algorithm.
-    Args:
-        graph: Tensor of probabilities of dim (len(emission),len(tokens)).
-        emmision: Tensor containig actual set probabilities. 
-        tokens: Tokenized transcript.
-        blank_if: default 0.
-    Returns:
-        path: list of Point object containing most probable path.
-    """
 
     t,j=graph.size(0)-1,graph.size(1)-1
 
@@ -106,9 +116,3 @@ def merge_words(segments, separator="|"):
             i2+=1
     
     return words 
-
-def generate_alignment():
-    """jo bhi alingnment bane hai usko save kardega"""
-    
-    pass 
-

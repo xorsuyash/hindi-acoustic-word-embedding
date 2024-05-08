@@ -19,3 +19,4 @@ class Segment:
     @property
     def length(self):
         return self.end - self.start
+
