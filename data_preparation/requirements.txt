@@ -1,5 +1,10 @@
 torch>=2
 torchaudio>=2
-transformers
 pandas
 setuptools>=65
+accelerate
+datasets
+pyctcdecode
+soundfile
+scipy
+transformers

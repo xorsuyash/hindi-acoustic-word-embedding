@@ -1,3 +1,5 @@
+"""voice activity detection"""
+
 import hashlib 
 import os 
 import urllib 

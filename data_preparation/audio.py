@@ -7,7 +7,7 @@ import torch
 import torch.nn.functional as F 
 
 
-SAMPLE_RATE=16000
+SAMPLE_RATE=8000
 
 
 def load_audio(file:str,sr: int=SAMPLE_RATE):
@@ -37,7 +37,7 @@ def load_audio(file:str,sr: int=SAMPLE_RATE):
 
         raise RuntimeError(f"Failed to load audio: {e.stderr.decode()}") from e 
     
-    return np.frombuffer(out,np.int16).flatten().astype(np.float32)
+    return np.frombuffer(out,np.int16).flatten().astype(np.float32)/ 32768.0
 
 
 if __name__=='__main__':
