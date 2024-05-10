@@ -44,7 +44,7 @@ The aligned audios will be saved inside the specified folder and the directory s
                          |____ metadat.json 
 schema for matadata.json will be 
 ```json
-      json_data = {
+{
     "original_file_name": original_file_name,
     "original_file_path": original_file_path,
     "original_transcript": original_transcript,
@@ -53,6 +53,6 @@ schema for matadata.json will be
     {"word_label": "अपने", "file_path": "/path/to/segment_1.wav", "duration": 3.0},
     {"word_label": "पेट", "file_path": "/path/to/segment_2.wav", "duration": 4.2}
      ]
-     }
+}
             
 
